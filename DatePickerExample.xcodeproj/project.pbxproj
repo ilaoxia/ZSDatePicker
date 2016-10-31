@@ -15,6 +15,8 @@
 		76EC62B61DC783480087D26C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76EC62B41DC783480087D26C /* LaunchScreen.storyboard */; };
 		76EC62C11DC783480087D26C /* DatePickerExampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 76EC62C01DC783480087D26C /* DatePickerExampleTests.m */; };
 		76EC62CC1DC783480087D26C /* DatePickerExampleUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 76EC62CB1DC783480087D26C /* DatePickerExampleUITests.m */; };
+		76EC62DE1DC783560087D26C /* ZSDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 76EC62DB1DC783560087D26C /* ZSDatePicker.m */; };
+		76EC62DF1DC783560087D26C /* ZSPickerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 76EC62DD1DC783560087D26C /* ZSPickerModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +53,10 @@
 		76EC62C71DC783480087D26C /* DatePickerExampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DatePickerExampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		76EC62CB1DC783480087D26C /* DatePickerExampleUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DatePickerExampleUITests.m; sourceTree = "<group>"; };
 		76EC62CD1DC783480087D26C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		76EC62DA1DC783560087D26C /* ZSDatePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZSDatePicker.h; sourceTree = "<group>"; };
+		76EC62DB1DC783560087D26C /* ZSDatePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZSDatePicker.m; sourceTree = "<group>"; };
+		76EC62DC1DC783560087D26C /* ZSPickerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZSPickerModel.h; sourceTree = "<group>"; };
+		76EC62DD1DC783560087D26C /* ZSPickerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZSPickerModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +107,7 @@
 		76EC62A51DC783480087D26C /* DatePickerExample */ = {
 			isa = PBXGroup;
 			children = (
+				76EC62D91DC783560087D26C /* DatePicker */,
 				76EC62A91DC783480087D26C /* AppDelegate.h */,
 				76EC62AA1DC783480087D26C /* AppDelegate.m */,
 				76EC62AC1DC783480087D26C /* ViewController.h */,
@@ -138,6 +145,17 @@
 				76EC62CD1DC783480087D26C /* Info.plist */,
 			);
 			path = DatePickerExampleUITests;
+			sourceTree = "<group>";
+		};
+		76EC62D91DC783560087D26C /* DatePicker */ = {
+			isa = PBXGroup;
+			children = (
+				76EC62DA1DC783560087D26C /* ZSDatePicker.h */,
+				76EC62DB1DC783560087D26C /* ZSDatePicker.m */,
+				76EC62DC1DC783560087D26C /* ZSPickerModel.h */,
+				76EC62DD1DC783560087D26C /* ZSPickerModel.m */,
+			);
+			path = DatePicker;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -274,7 +292,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				76EC62AE1DC783480087D26C /* ViewController.m in Sources */,
+				76EC62DF1DC783560087D26C /* ZSPickerModel.m in Sources */,
 				76EC62AB1DC783480087D26C /* AppDelegate.m in Sources */,
+				76EC62DE1DC783560087D26C /* ZSDatePicker.m in Sources */,
 				76EC62A81DC783480087D26C /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
