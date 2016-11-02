@@ -22,7 +22,7 @@
 /** 初始化选定的时间 */
 @property (nonatomic, strong) NSDate *date;
 
-- (instancetype)initWithFrame:(CGRect)frame pickerMode:(ZSDatePickerMode )pickerMode delegate:(id<ZSDatePickerDelegate>)delegate;
+- (instancetype)initWithFrame:(CGRect)frame pickerStyle:(ZSDatePickerStyle )pickerStyle delegate:(id<ZSDatePickerDelegate>)delegate;
 - (void)show;
 - (void)cancel;
 

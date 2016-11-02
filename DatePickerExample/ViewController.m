@@ -32,6 +32,14 @@
     self.datePicker.date = [NSDate date];
 }
 
+- (IBAction)DateStyleBtnClick:(id)sender {
+    
+}
+
+
+- (IBAction)TimeStyleBtnClick:(id)sender {
+}
+
 #pragma mark - ZSDatePickerDelegate
 - (void)pickerViewSelectedWithModel:(ZSPickerModel *)pickerModel {
     self.pickerModel = pickerModel;
@@ -61,7 +69,7 @@
     if (_datePicker == nil) {
         CGFloat pickerH = 250;
         CGRect frame = CGRectMake(0, self.view.bounds.size.height - pickerH, self.view.bounds.size.width, pickerH);
-        _datePicker = [[ZSDatePicker alloc]initWithFrame:frame pickerMode:ZSDatePickerModeDateAndTime delegate:self];
+        _datePicker = [[ZSDatePicker alloc]initWithFrame:frame pickerStyle:ZSDatePickerStyleTime delegate:self];
         [self.view addSubview:_datePicker];
     }
     return _datePicker;

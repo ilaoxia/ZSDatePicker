@@ -10,7 +10,7 @@
 
 @interface ZSPickerModel ()
 
-@property (nonatomic, assign) ZSDatePickerMode pickerMode;
+@property (nonatomic, assign) ZSDatePickerStyle pickerStyle;
 @property (nonatomic, strong) NSMutableArray *dataArray;
 @property (nonatomic, strong) NSMutableArray *yearArray;
 @property (nonatomic, strong) NSMutableArray *monthArray;
@@ -23,16 +23,16 @@
 
 @implementation ZSPickerModel
 
-+ (NSMutableArray *)modelWithPickerMode:(ZSDatePickerMode )pickerMode {
-    ZSPickerModel *pickerModel = [[ZSPickerModel alloc]initWithPickerMode:pickerMode];
++ (NSMutableArray *)modelWithPickerStyle:(ZSDatePickerStyle )pickerStyle {
+    ZSPickerModel *pickerModel = [[ZSPickerModel alloc]initWithPickerStyle:pickerStyle];
     return [pickerModel getDataArray];
 }
 
-+ (ZSPickerModel *)modelWithComponent:(NSInteger)compoment row:(NSInteger)row mode:(ZSDatePickerMode )pickerMode pickerModel:(ZSPickerModel *)pickerModel{
++ (ZSPickerModel *)modelWithComponent:(NSInteger)compoment row:(NSInteger)row style:(ZSDatePickerStyle )pickerStyle pickerModel:(ZSPickerModel *)pickerModel{
     NSMutableArray *dataArray = [pickerModel getDataArray];
     NSArray *componentArray = dataArray[compoment];
-    switch (pickerMode) {
-        case ZSDatePickerModeDateAndTime:{
+    switch (pickerStyle) {
+        case ZSDatePickerStyleDateAndTime:{
             switch (compoment) {
                 case 0:
                     pickerModel.year = componentArray[row];
@@ -54,7 +54,7 @@
             }
         }
             break;
-        case ZSDatePickerModeDate: {
+        case ZSDatePickerStyleDate: {
             switch (compoment) {
                 case 0:
                     pickerModel.year = componentArray[row];
@@ -67,7 +67,7 @@
                     break;
             }
         }
-        case ZSDatePickerModeTime: {
+        case ZSDatePickerStyleTime: {
             switch (compoment) {
                 case 0:
                     pickerModel.hour = componentArray[row];
@@ -83,12 +83,13 @@
         default:
             break;
     }
+    pickerModel.date = [ZSPickerModel getDateWtihModel:pickerModel];
     return pickerModel;
 }
 
-- (instancetype)initWithPickerMode:(ZSDatePickerMode )pickerMode {
+- (instancetype)initWithPickerStyle:(ZSDatePickerStyle )pickerStyle {
     if (self = [super init]) {
-        self.pickerMode = pickerMode;
+        self.pickerStyle = pickerStyle;
     }
     return self;
 }
@@ -107,45 +108,7 @@
     return array;
 }
 
-+ (NSArray *)getDetailDateNumber:(NSDate *)date {
-    NSCalendar *calendar =  [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];//设置成中国阳历
-    NSDateComponents *comps = [[NSDateComponents alloc] init];
-    NSInteger unitFlags = NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitWeekday | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond;
-    comps = [calendar components:unitFlags fromDate:date];
-    long day=[comps day];
-    long year=[comps year];
-    long month=[comps month];
-    long hour=[comps hour];
-    long minute=[comps minute];
-    long second=[comps second];
-    
-    NSMutableArray *dateArray = [[NSMutableArray alloc]init];
-    [dateArray addObject:@(year - 2000)];
-    [dateArray addObject:@(month -1)];
-    [dateArray addObject:@(day -1)];
-    [dateArray addObject:@(hour)];
-    [dateArray addObject:@(minute)];
-    [dateArray addObject:@(second)];
-    return dateArray;
-}
 
-+ (NSInteger)getDaysInYear:(NSInteger)year withMonth:(NSInteger)month{
-    if((month == 1) || (month == 3) || (month == 5) || (month == 7) || (month == 8) || (month == 10) || (month == 12))
-        return 31 ;
-    if((month == 4) || (month == 6) || (month == 9) || (month == 11))
-        return 30;
-    if(year % 4 > 0) {
-        return 28;
-    }
-    
-    if(year % 400 == 0)
-        return 29;
-    
-    if(year % 100 == 0)
-        return 28;
-    
-    return 29;
-}
 
 - (NSString *)descrition {
     NSDictionary *dic= @{@"year":self.year,@"month":self.month,@"day":self.day,@"hour":self.hour,@"minute":self.minute,@"second":self.second};
@@ -228,23 +191,88 @@
 - (NSMutableArray *)dataArray {
     if (_dataArray == nil) {
         _dataArray = [[NSMutableArray alloc]init];
-        if (self.pickerMode == ZSDatePickerModeDateAndTime) {
+        if (self.pickerStyle == ZSDatePickerStyleDateAndTime) {
             [_dataArray addObject:self.yearArray];
             [_dataArray addObject:self.monthArray];
             [_dataArray addObject:self.dayArray];
             [_dataArray addObject:self.hourArray];
             [_dataArray addObject:self.minuteArray];
-        } else if (self.pickerMode == ZSDatePickerModeDate) {
+        } else if (self.pickerStyle == ZSDatePickerStyleDate) {
             [_dataArray addObject:self.yearArray];
             [_dataArray addObject:self.monthArray];
             [_dataArray addObject:self.dayArray];
-        } else if (self.pickerMode == ZSDatePickerModeTime) {
+        } else if (self.pickerStyle == ZSDatePickerStyleTime) {
             [_dataArray addObject:self.hourArray];
             [_dataArray addObject:self.minuteArray];
             [_dataArray addObject:self.secondArray];
         }
     }
     return _dataArray;
+}
+
+#pragma mark - timeTool
++ (NSArray *)getDetailDateNumber:(NSDate *)date {
+    NSCalendar *calendar =  [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];//设置成中国阳历
+    NSDateComponents *comps = [[NSDateComponents alloc] init];
+    NSInteger unitFlags = NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitWeekday | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond;
+    comps = [calendar components:unitFlags fromDate:date];
+    long day=[comps day];
+    long year=[comps year];
+    long month=[comps month];
+    long hour=[comps hour];
+    long minute=[comps minute];
+    long second=[comps second];
+    
+    NSMutableArray *dateArray = [[NSMutableArray alloc]init];
+    [dateArray addObject:@(year - 2000)];
+    [dateArray addObject:@(month -1)];
+    [dateArray addObject:@(day -1)];
+    [dateArray addObject:@(hour)];
+    [dateArray addObject:@(minute)];
+    [dateArray addObject:@(second)];
+    return dateArray;
+}
+
++ (NSInteger)getDaysInYear:(NSInteger)year withMonth:(NSInteger)month{
+    if((month == 1) || (month == 3) || (month == 5) || (month == 7) || (month == 8) || (month == 10) || (month == 12))
+        return 31 ;
+    if((month == 4) || (month == 6) || (month == 9) || (month == 11))
+        return 30;
+    if(year % 4 > 0) {
+        return 28;
+    }
+    
+    if(year % 400 == 0)
+        return 29;
+    
+    if(year % 100 == 0)
+        return 28;
+    
+    return 29;
+}
+
++ (NSDate *)getDateWtihModel:(ZSPickerModel *)model{
+    //目前只写一种 年月日时分
+    if (model.pickerStyle == ZSDatePickerStyleDateAndTime) {
+        NSCalendar *greCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+        NSInteger year  = [ZSPickerModel getNumberWithString:model.year key:@"年"] + 2000;
+        NSInteger month = [ZSPickerModel getNumberWithString:model.month key:@"月"];
+        NSInteger day   = [ZSPickerModel getNumberWithString:model.day key:@"日"];
+        NSDateComponents *dateComponentsForDate = [[NSDateComponents alloc] init];
+        [dateComponentsForDate setYear:year];
+        [dateComponentsForDate setMonth:month];
+        [dateComponentsForDate setDay:day];
+        [dateComponentsForDate setHour:[model.hour integerValue]];
+        [dateComponentsForDate setMinute:[model.minute integerValue]];
+        NSDate *date = [greCalendar dateFromComponents:dateComponentsForDate];
+        return date;
+    } else
+        return nil;
+}
+
++ (NSInteger )getNumberWithString:(NSString *)string key:(NSString *)key {
+    NSString *str = [string stringByReplacingOccurrencesOfString:key withString:@""];
+    return [str integerValue];
 }
 
 @end

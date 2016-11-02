@@ -8,24 +8,25 @@
 
 #import <Foundation/Foundation.h>
 
-typedef NS_ENUM(NSUInteger,ZSDatePickerMode) {
-    ZSDatePickerModeDate,          ///年月日
-    ZSDatePickerModeTime,          ///时分秒
-    ZSDatePickerModeDateAndTime    ///年月日时分
+typedef NS_ENUM(NSUInteger,ZSDatePickerStyle) {
+    ZSDatePickerStyleDate,          ///年月日
+    ZSDatePickerStyleTime,          ///时分秒
+    ZSDatePickerStyleDateAndTime    ///年月日时分
 };
 
 @interface ZSPickerModel : NSObject
 
-@property (nonatomic, copy) NSString *year;
-@property (nonatomic, copy) NSString *month;
-@property (nonatomic, copy) NSString *day;
-@property (nonatomic, copy) NSString *hour;
-@property (nonatomic, copy) NSString *minute;
-@property (nonatomic, copy) NSString *second;
+@property (nonatomic, copy) NSString *year;   ///年
+@property (nonatomic, copy) NSString *month;  ///月
+@property (nonatomic, copy) NSString *day;    ///日
+@property (nonatomic, copy) NSString *hour;   ///时
+@property (nonatomic, copy) NSString *minute; ///分
+@property (nonatomic, copy) NSString *second; ///秒
+@property (nonatomic, strong) NSDate *date;   ///获取选定的的时间date
 
-- (instancetype)initWithPickerMode:(ZSDatePickerMode )pickerMode;
-+ (NSMutableArray *)modelWithPickerMode:(ZSDatePickerMode )pickerMode;
-+ (ZSPickerModel *)modelWithComponent:(NSInteger)compoment row:(NSInteger)row mode:(ZSDatePickerMode )pickerMode pickerModel:(ZSPickerModel *)pickerModel;
+- (instancetype)initWithPickerStyle:(ZSDatePickerStyle )pickerStyle;
++ (NSMutableArray *)modelWithPickerStyle:(ZSDatePickerStyle )pickerStyle;
++ (ZSPickerModel *)modelWithComponent:(NSInteger)compoment row:(NSInteger)row style:(ZSDatePickerStyle )pickerMode pickerModel:(ZSPickerModel *)pickerModel;
 + (NSArray *)getDaysComponentArrayWithDays:(NSInteger)days;
 + (NSArray *)getDetailDateNumber:(NSDate *)date;
 + (NSInteger)getDaysInYear:(NSInteger)year withMonth:(NSInteger)month;

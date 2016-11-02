@@ -16,7 +16,7 @@
 
 @property (nonatomic, strong) ZSPickerModel *pickerModel;
 @property (nonatomic, weak) id<ZSDatePickerDelegate> delegate;
-@property (nonatomic, assign) ZSDatePickerMode pickerMode;
+@property (nonatomic, assign) ZSDatePickerStyle pickerStyle;
 @property (nonatomic, strong) UIView *topView;
 @property (nonatomic, strong) UIButton *sureBtn;
 @property (nonatomic, strong) UIButton *cancelBtn;
@@ -28,12 +28,12 @@
 
 @implementation ZSDatePicker
 
-- (instancetype)initWithFrame:(CGRect)frame pickerMode:(ZSDatePickerMode )pickerMode delegate:(id<ZSDatePickerDelegate>)delegate {
+- (instancetype)initWithFrame:(CGRect)frame pickerStyle:(ZSDatePickerStyle )pickerStyle delegate:(id<ZSDatePickerDelegate>)delegate {
     if (self = [super init]) {
-        self.frame      = frame;
-        self.oldFrame   = frame;
-        self.delegate   = delegate;
-        self.pickerMode = pickerMode;
+        self.frame       = frame;
+        self.oldFrame    = frame;
+        self.delegate    = delegate;
+        self.pickerStyle = pickerStyle;
         self.backgroundColor = [UIColor whiteColor];
         [self initSubViews];
     }
@@ -110,34 +110,34 @@
 }
 
 - (void)selectedCompnentWithArray:(NSArray *)array {
-    switch (self.pickerMode) {
-        case ZSDatePickerModeDateAndTime:{
+    switch (self.pickerStyle) {
+        case ZSDatePickerStyleDateAndTime:{
             for (NSInteger i = 0; i < 5; i++) {
                 NSInteger row = [array[i] integerValue];
                 [self.picker selectRow:row inComponent:i animated:YES];
-                self.pickerModel = [ZSPickerModel modelWithComponent:i row:row mode:self.pickerMode pickerModel:self.pickerModel];
+                self.pickerModel = [ZSPickerModel modelWithComponent:i row:row style:self.pickerStyle pickerModel:self.pickerModel];
                 if (i == 1) {
                     [self updateEveryMonthDaysWithRow:row inComponent:i];
                 }
             }
         }
             break;
-        case ZSDatePickerModeDate:{
+        case ZSDatePickerStyleDate:{
             for (NSInteger i = 0; i < 3; i++) {
                 NSInteger row = [array[i] integerValue];
                 [self.picker selectRow:row inComponent:i animated:YES];
-               self.pickerModel = [ZSPickerModel modelWithComponent:i row:row mode:self.pickerMode pickerModel:self.pickerModel];
+                self.pickerModel = [ZSPickerModel modelWithComponent:i row:row style:self.pickerStyle pickerModel:self.pickerModel];
                 if (i == 1) {
                     [self updateEveryMonthDaysWithRow:row inComponent:i];
                 }
             }
         }
             break;
-        case ZSDatePickerModeTime:{
+        case ZSDatePickerStyleTime:{
             for (NSInteger i = 5; i > 2; i--) {
                 NSInteger row = [array[i] integerValue];
                 [self.picker selectRow:row inComponent:i animated:YES];
-                self.pickerModel = [ZSPickerModel modelWithComponent:i row:row mode:self.pickerMode pickerModel:self.pickerModel];
+                self.pickerModel = [ZSPickerModel modelWithComponent:i row:row style:self.pickerStyle pickerModel:self.pickerModel];
             }
         }
             break;
@@ -170,7 +170,7 @@
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-    self.pickerModel = [ZSPickerModel modelWithComponent:component row:row mode:self.pickerMode pickerModel:self.pickerModel];
+    self.pickerModel = [ZSPickerModel modelWithComponent:component row:row style:self.pickerStyle pickerModel:self.pickerModel];
     //根据月份获取具体天数
     [self updateEveryMonthDaysWithRow:row inComponent:component];
     if (self.delegate && [self.delegate respondsToSelector:@selector(pickerViewSelectedWithModel:)]) {
@@ -180,7 +180,7 @@
 
 //更新每月天数
 - (void)updateEveryMonthDaysWithRow:(NSInteger)row inComponent:(NSInteger)component {
-    if (self.pickerMode != ZSDatePickerModeTime && component == 1) {
+    if (self.pickerStyle != ZSDatePickerStyleTime && component == 1) {
         NSInteger year  = [self.pickerModel.year integerValue] + 2000;
         NSInteger month = [self.pickerModel.month integerValue];
         NSInteger days  = [ZSPickerModel getDaysInYear:year withMonth:month];
@@ -195,14 +195,14 @@
 
 - (NSMutableArray *)dataArray {
     if (_dataArray == nil) {
-        _dataArray = [ZSPickerModel modelWithPickerMode:self.pickerMode];
+        _dataArray = [ZSPickerModel modelWithPickerStyle:self.pickerStyle];
     }
     return _dataArray;
 }
 
 - (ZSPickerModel *)pickerModel {
     if (_pickerModel == nil) {
-        _pickerModel = [[ZSPickerModel alloc]initWithPickerMode:self.pickerMode];
+        _pickerModel = [[ZSPickerModel alloc]initWithPickerStyle:self.pickerStyle];
     }
     return _pickerModel;
 }

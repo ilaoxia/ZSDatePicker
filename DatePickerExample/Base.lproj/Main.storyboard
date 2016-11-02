@@ -30,7 +30,7 @@
                                     <action selector="DateAndTimeStyleBtnClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vuz-X2-sdP"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00年1月一日 00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9s1-kd-wIv">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00年1月1日 00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9s1-kd-wIv">
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="wGl-ri-gnV"/>
                                 </constraints>
@@ -38,11 +38,53 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sLK-f0-atN">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="ONW-aE-VDh"/>
+                                </constraints>
+                                <state key="normal" title="DateStyle:  ">
+                                    <color key="titleColor" red="0.85098039215686272" green="0.21176470588235294" blue="0.22352941176470587" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="DateStyleBtnClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="lI6-br-lxs"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00年1月1日" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gih-Fs-Y5L">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="drW-ER-2bF">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="3Xi-x7-9vn"/>
+                                </constraints>
+                                <state key="normal" title="TimeStyle:  ">
+                                    <color key="titleColor" red="0.85098039215686272" green="0.21568627450980393" blue="0.22352941176470587" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="TimeStyleBtnClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4hv-Mh-dmU"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KHr-va-BgU">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="drW-ER-2bF" firstAttribute="trailing" secondItem="sLK-f0-atN" secondAttribute="trailing" id="Bht-vl-9wr"/>
+                            <constraint firstItem="KHr-va-BgU" firstAttribute="height" secondItem="gih-Fs-Y5L" secondAttribute="height" id="ExP-2u-ASz"/>
+                            <constraint firstItem="sLK-f0-atN" firstAttribute="trailing" secondItem="jjq-lV-Rq5" secondAttribute="trailing" id="HYT-Tn-8nj"/>
+                            <constraint firstItem="gih-Fs-Y5L" firstAttribute="height" secondItem="9s1-kd-wIv" secondAttribute="height" id="HzH-WX-DPa"/>
+                            <constraint firstItem="sLK-f0-atN" firstAttribute="top" secondItem="jjq-lV-Rq5" secondAttribute="bottom" constant="15" id="Nac-zj-DtZ"/>
                             <constraint firstItem="9s1-kd-wIv" firstAttribute="centerY" secondItem="jjq-lV-Rq5" secondAttribute="centerY" id="PwZ-74-LW8"/>
+                            <constraint firstItem="drW-ER-2bF" firstAttribute="top" secondItem="sLK-f0-atN" secondAttribute="bottom" constant="15" id="R10-xs-390"/>
+                            <constraint firstItem="KHr-va-BgU" firstAttribute="leading" secondItem="drW-ER-2bF" secondAttribute="trailing" constant="10" id="Up5-5n-a4E"/>
+                            <constraint firstItem="gih-Fs-Y5L" firstAttribute="centerY" secondItem="sLK-f0-atN" secondAttribute="centerY" id="d4k-Ws-prr"/>
+                            <constraint firstItem="KHr-va-BgU" firstAttribute="centerY" secondItem="drW-ER-2bF" secondAttribute="centerY" id="gH2-fS-yQa"/>
                             <constraint firstItem="jjq-lV-Rq5" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="30" id="iez-jb-PaP"/>
+                            <constraint firstItem="gih-Fs-Y5L" firstAttribute="leading" secondItem="sLK-f0-atN" secondAttribute="trailing" constant="10" id="lYD-cU-8PX"/>
                             <constraint firstItem="jjq-lV-Rq5" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="150" id="mra-Vy-YOC"/>
                             <constraint firstItem="9s1-kd-wIv" firstAttribute="leading" secondItem="jjq-lV-Rq5" secondAttribute="trailing" constant="10" id="tpg-Ki-E2R"/>
                         </constraints>
