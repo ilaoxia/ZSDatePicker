@@ -91,6 +91,8 @@
                     </view>
                     <connections>
                         <outlet property="dateAndTimeLabel" destination="9s1-kd-wIv" id="rt2-Ru-IKR"/>
+                        <outlet property="dateLabel" destination="gih-Fs-Y5L" id="f4F-Uw-vzb"/>
+                        <outlet property="timeLabel" destination="KHr-va-BgU" id="Wnz-6Y-TSZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

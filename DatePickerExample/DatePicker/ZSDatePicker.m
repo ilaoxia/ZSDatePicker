@@ -98,7 +98,7 @@
 
 - (void)cancel {
     [UIView animateWithDuration:0.3 animations:^{
-        self.frame = CGRectMake(0, self.frame.origin.y+self.frame.size.height, self.frame.size.width, self.frame.size.height);
+        self.frame = CGRectMake(0, self.frame.origin.y + self.frame.size.height, self.frame.size.width, self.frame.size.height);
     }];
 }
 
@@ -134,10 +134,10 @@
         }
             break;
         case ZSDatePickerStyleTime:{
-            for (NSInteger i = 5; i > 2; i--) {
+            for (NSInteger i = 3; i < 6; i++) {
                 NSInteger row = [array[i] integerValue];
-                [self.picker selectRow:row inComponent:i animated:YES];
-                self.pickerModel = [ZSPickerModel modelWithComponent:i row:row style:self.pickerStyle pickerModel:self.pickerModel];
+                [self.picker selectRow:row inComponent:i - 3 animated:YES];
+                self.pickerModel = [ZSPickerModel modelWithComponent:i - 3 row:row style:self.pickerStyle pickerModel:self.pickerModel];
             }
         }
             break;

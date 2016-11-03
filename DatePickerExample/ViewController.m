@@ -12,9 +12,13 @@
 @interface ViewController ()<ZSDatePickerDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *dateAndTimeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
+@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
+
 @property (nonatomic, strong) UIView *backView;
 @property (nonatomic, strong) ZSDatePicker *datePicker;
 @property (nonatomic, strong) ZSPickerModel *pickerModel;
+@property (nonatomic, assign) ZSDatePickerStyle pickerStyle;
 
 @end
 
@@ -26,18 +30,29 @@
     
     // Do any additional setup after loading the view, typically from a nib.
 }
+
+
+
+#pragma mark - event
 - (IBAction)DateAndTimeStyleBtnClick:(id)sender {
-    self.backView.hidden = NO;
-    [self.datePicker show];
-    self.datePicker.date = [NSDate date];
+    [self showWithStyle:ZSDatePickerStyleDateAndTime];
 }
 
 - (IBAction)DateStyleBtnClick:(id)sender {
-    
+    [self showWithStyle:ZSDatePickerStyleDate];
 }
 
-
 - (IBAction)TimeStyleBtnClick:(id)sender {
+    [self showWithStyle:ZSDatePickerStyleTime];
+}
+
+- (void)showWithStyle:(ZSDatePickerStyle )pickerStyle {
+    self.backView.hidden = YES;
+    self.pickerStyle = pickerStyle;
+    [_datePicker removeFromSuperview];
+    _datePicker = nil;
+    [self.datePicker show];
+    self.datePicker.date = [NSDate date];
 }
 
 #pragma mark - ZSDatePickerDelegate
@@ -48,8 +63,26 @@
 - (void)dismissPickerWithCompleted:(BOOL)compltete {
     self.backView.hidden = YES;
     if (compltete) {
-        NSString *detail = [NSString stringWithFormat:@"%@%@%@ %@:%@",self.pickerModel.year,self.pickerModel.month,self.pickerModel.day,self.pickerModel.hour,self.pickerModel.minute];
-        self.dateAndTimeLabel.text = detail;
+        switch (self.pickerStyle) {
+            case ZSDatePickerStyleDateAndTime: {
+                NSString *detail = [NSString stringWithFormat:@"%@%@%@ %@:%@",self.pickerModel.year,self.pickerModel.month,self.pickerModel.day,self.pickerModel.hour,self.pickerModel.minute];
+                self.dateAndTimeLabel.text = detail;
+            }
+                break;
+            case ZSDatePickerStyleDate: {
+                NSString *detail = [NSString stringWithFormat:@"%@%@%@",self.pickerModel.year,self.pickerModel.month,self.pickerModel.day];
+                self.dateLabel.text = detail;
+            }
+                break;
+            case ZSDatePickerStyleTime: {
+                NSString *detail = [NSString stringWithFormat:@"%@:%@:%@",self.pickerModel.hour,self.pickerModel.minute,self.pickerModel.second];
+                self.timeLabel.text = detail;
+            }
+                break;
+            default:
+                break;
+        }
+        
     }
 }
 
@@ -69,7 +102,7 @@
     if (_datePicker == nil) {
         CGFloat pickerH = 250;
         CGRect frame = CGRectMake(0, self.view.bounds.size.height - pickerH, self.view.bounds.size.width, pickerH);
-        _datePicker = [[ZSDatePicker alloc]initWithFrame:frame pickerStyle:ZSDatePickerStyleTime delegate:self];
+        _datePicker = [[ZSDatePicker alloc]initWithFrame:frame pickerStyle:self.pickerStyle delegate:self];
         [self.view addSubview:_datePicker];
     }
     return _datePicker;
