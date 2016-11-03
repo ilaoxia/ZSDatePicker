@@ -47,7 +47,7 @@
 }
 
 - (void)showWithStyle:(ZSDatePickerStyle )pickerStyle {
-    self.backView.hidden = YES;
+    self.backView.alpha = 0.5;
     self.pickerStyle = pickerStyle;
     [_datePicker removeFromSuperview];
     _datePicker = nil;
@@ -61,7 +61,7 @@
 }
 
 - (void)dismissPickerWithCompleted:(BOOL)compltete {
-    self.backView.hidden = YES;
+    self.backView.alpha = 0;
     if (compltete) {
         switch (self.pickerStyle) {
             case ZSDatePickerStyleDateAndTime: {
@@ -91,8 +91,6 @@
         _backView = [[UIView alloc]init];
         _backView.frame = self.view.bounds;
         _backView.backgroundColor = [UIColor blackColor];
-        _backView.alpha = 0.5;
-        _backView.userInteractionEnabled = YES;
         [self.view addSubview:_backView];
     }
     return _backView;
