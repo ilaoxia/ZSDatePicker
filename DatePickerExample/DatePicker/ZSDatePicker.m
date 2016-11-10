@@ -74,6 +74,11 @@
     [sureBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [sureBtn addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
     [topView addSubview:sureBtn];
+    
+    UIView *line = [[UIView alloc]init];
+    line.frame = CGRectMake(0, CGRectGetMaxY(topView.frame), self.oldFrame.size.width, 1);
+    line.backgroundColor = RGB(217, 217, 217);
+    [self addSubview:line];
 }
 
 - (void)btnClick:(UIButton *)btn {
